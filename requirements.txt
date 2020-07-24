@@ -1,5 +1,5 @@
 django==2.2.13
 django-heroku
-Markdown==3.2.2
+markdown2==2.3.9
 gunicorn==19.9.0
 psycopg2
