@@ -1,9 +1,7 @@
 import random
 
 from django import forms
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
 
 from . import util
 
@@ -13,7 +11,7 @@ markdowner = Markdown()
 
 
 class Search(forms.Form):
-    item = forms.CharField()
+    item = forms.CharField(widget=forms.TextInput(attrs={'class' : 'myfieldclass'}))
 
 class Post(forms.Form):
     title = forms.CharField(label= "Title")
