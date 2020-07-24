@@ -55,3 +55,7 @@ a{
 a:hover{
     color:black;
 }
+
+.myfieldclass{
+    border: none;
+}
