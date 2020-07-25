@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block body %}
-<div style="border: 1px solid black; padding: 20px; margin-right: 16px;">
+<div class="entry">
     {{ page|safe }}
-    <a href=/edit/{{title}}>Edit Page</a>
+    <a class="edit" href=/edit/{{title}}>Edit Page</a>
 </div>
     
 {% endblock %}

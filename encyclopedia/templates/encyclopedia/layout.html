@@ -5,19 +5,19 @@
 <html lang="en">
     <head>
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
     </head>
     <body>
         <div class="row">
-            <div class="sidebar col-lg-2 col-md-3">
+            <div class="sidebar">
                 <h2 class="display-3">Wiki</h2>
-                <form class="form-control" method="post" action="{% url 'index' %}">
+                <form method="post" action="{% url 'index' %}">
                 {% csrf_token %}
-                    <h6>Search: {{form.item}}</h6>
+                    {{form.item}}
                 </form>
                 <div>
-                    <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    <a class="top nav-link" href="{% url 'index' %}">Home</a>
                 </div>
                 <div>
                     <a class="nav-link" href="{% url 'create' %}">Create New Page</a>
@@ -28,7 +28,7 @@
                 {% block nav %}
                 {% endblock %}
             </div>
-            <div class="main col-lg-10 col-md-9">
+            <div class="main">
                 {% block body %}
                 {% endblock %}
             </div>

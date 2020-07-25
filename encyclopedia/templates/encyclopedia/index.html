@@ -6,10 +6,9 @@
 
 {% block body %}
     <h1 class="display-4">All Pages</h1>
-    <hr>
     <ul>
         {% for entry in entries %}
-            <li><a href=/wiki/{{entry}}>{{ entry }}</a></li>
+            <li class="entry-link"><a href=/wiki/{{entry}}>{{ entry }}</a></li>
         {% endfor %}
     </ul>
 
