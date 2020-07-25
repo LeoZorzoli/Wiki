@@ -11,7 +11,7 @@ markdowner = Markdown()
 
 
 class Search(forms.Form):
-    item = forms.CharField(widget=forms.TextInput(attrs={'class' : 'myfieldclass'}))
+    item = forms.CharField(widget=forms.TextInput(attrs={'class' : 'myfieldclass', 'placeholder': 'Search'}))
 
 class Post(forms.Form):
     title = forms.CharField(label= "Title")
