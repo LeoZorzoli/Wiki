@@ -31,10 +31,21 @@ def index(request):
                 if item in entries:
                     page = util.get_entry(item)
                     page_converted = markdowner.convert(page)
-                    return render(request, "encyclopedia/entry.html", {"page": page_converted, "title": item, "form":Search()})
+                    
+                    context = {
+                        'page': page_converted,
+                        'title': item,
+                        'form': Search()
+                    }
+
+                    return render(request, "encyclopedia/entry.html", context)
                 if item.lower() in i.lower(): 
                     searched.append(i)
-            return render(request, "encyclopedia/search.html", {"searched": searched, "form":Search()})
+                    context = {
+                        'searched': searched, 
+                        'form': Search()
+                    }
+            return render(request, "encyclopedia/search.html", context)
 
         else:
             return render(request, "encyclopedia/index.html", {"form": form})
@@ -47,8 +58,15 @@ def entry(request, title):
     entries = util.list_entries()
     if title in entries:
         page = util.get_entry(title)
-        page_converted = markdowner.convert(page)
-        return render(request, "encyclopedia/entry.html", {"page": page_converted, "title": title, "form":Search()})
+        page_converted = markdowner.convert(page) 
+
+        context = {
+            'page': page_converted,
+            'title': title,
+            'form': Search()
+        }
+
+        return render(request, "encyclopedia/entry.html", context)
     else:
         return render(request, "encyclopedia/error.html", {"message": "The requested page was not found.", "form":Search()})
 
@@ -66,7 +84,14 @@ def create(request):
                 util.save_entry(title,textarea)
                 page = util.get_entry(title)
                 page_converted = markdowner.convert(page)
-                return render(request, "encyclopedia/entry.html", {"form": Search(), "page": page_converted, "title": title})
+
+                context = {
+                    'form': Search(),
+                    'page': page_converted,
+                    'title': title
+                }
+
+                return render(request, "encyclopedia/entry.html", context)
     else:
         return render(request, "encyclopedia/create.html", {"form": Search(), "post": Post()})
 
@@ -74,7 +99,14 @@ def create(request):
 def edit(request, title):
     if request.method == 'GET':
         page = util.get_entry(title)
-        return render(request, "encyclopedia/edit.html", {"form": Search(), "edit":Edit(initial={'textarea': page}), 'title':title})
+        
+        context = {
+            'form': Search(),
+            'edit': Edit(initial={'textarea': page}),
+            'title': title
+        }
+
+        return render(request, "encyclopedia/edit.html", context)
     else:
         form = Edit(request.POST) 
         if form.is_valid():
@@ -82,7 +114,14 @@ def edit(request, title):
             util.save_entry(title,textarea)
             page = util.get_entry(title)
             page_converted = markdowner.convert(page)
-            return render(request, "encyclopedia/entry.html", {"form": Search(), "page": page_converted, "title": title})
+
+            context = {
+                'form': Search(),
+                'page': page_converted,
+                'title': title
+            }
+
+            return render(request, "encyclopedia/entry.html", context)
 
 def randomPage(request):
     if request.method == 'GET':
@@ -92,4 +131,10 @@ def randomPage(request):
         page = util.get_entry(page_random)
         page_converted = markdowner.convert(page)
 
-        return render(request, "encyclopedia/entry.html", {"form": Search(), "page": page_converted, "title": page_random})
+        context = {
+            'form': Search(),
+            'page': page_converted,
+            'title': page_random
+        }
+
+        return render(request, "encyclopedia/entry.html", context)
